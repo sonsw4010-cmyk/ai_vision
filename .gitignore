@@ -4,3 +4,9 @@
 **/.ipynb_checkpoints/
 **/.vscode/
 .DS_Store
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.glb
+*.pt
