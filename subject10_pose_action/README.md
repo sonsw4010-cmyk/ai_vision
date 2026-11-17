@@ -90,3 +90,70 @@ Feature가 시간에 따라 변하는 모습을 확인했습니다.
 
 4일차에는 여러 Frame의 Feature를 시간 순서로 묶어
 하나의 동작을 표현하는 **Sequence**로 확장합니다.
+
+## Day 04 - Action Clip & Sequence
+
+### 목표
+
+3일차의 38-D Frame Feature를
+영상의 시간 순서대로 연결하여
+Action Sequence를 만든다.
+
+### 사용한 Action
+
+- bend_return
+- leg_raise_lower
+- walk_turn_walk
+- drink_return
+- sit_stand
+- wave
+
+### Pipeline
+
+```text
+Action Clip
+→ Frame
+→ YOLO Pose
+→ COCO 17 Keypoint
+→ Normalization
+→ Joint Angle
+→ 38-D Frame Feature
+→ 시간 순서 유지
+→ Sequence
+→ Action Label
+```
+
+### 주요 코드
+
+```text
+scripts/
+├── 19_check_day04_data.py
+├── 20_check_action_classes.py
+├── 21_extract_clip_keyframes.py
+├── 22_build_action_sequences.py
+├── 23_summarize_action_sequences.py
+└── 24_inspect_sequence_stages.py
+```
+
+### 주요 결과
+
+- 6개의 Action Sequence CSV 생성
+- 총 824 Frame 처리
+- Pose 성공 824 / 824
+- Feature 생성 성공 824 / 824
+- Action별 Feature의 시간 변화 확인
+- 직접 촬영한 Action에도 같은 Sequence Pipeline 적용
+
+### 오늘 확인한 핵심
+
+- Pose는 한 순간의 자세이다.
+- Sequence는 Frame Feature의 시간 흐름이다.
+- Action은 한 Frame이 아니라 시간에 따른 자세 변화로 이해해야 한다.
+- Action마다 중요하게 변하는 Feature가 다를 수 있다.
+- 대표 Sample만으로 동작이 잘 보이지 않으면 더 많은 시점을 확인해야 한다.
+
+### 다음 수업
+
+Day 05에서는 여러 Subject와 반복 Take를 이용하여
+Sequence 데이터를 학습용 Dataset 구조로 확장하고
+품질검수와 데이터 분리를 진행한다.

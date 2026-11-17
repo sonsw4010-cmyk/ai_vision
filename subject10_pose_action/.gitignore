@@ -1,0 +1,16 @@
+# Raw data
+data/
+
+# Generated Day04 results
+reports/day04/keyframes/*.jpg
+reports/day04/sequences/*.csv
+reports/day04/tables/*.csv
+
+reports/day04/challenge/keyframes/*.jpg
+reports/day04/challenge/sequences/*.csv
+reports/day04/challenge/challenge_sequence_summary.csv
+# Video files and weights
+*.mp4
+*.avi
+*.mov
+*.pt
