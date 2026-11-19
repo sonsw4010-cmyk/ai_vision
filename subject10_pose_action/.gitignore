@@ -14,3 +14,7 @@ reports/day04/challenge/challenge_sequence_summary.csv
 *.avi
 *.mov
 *.pt
+
+# Generated Day05 results
+reports/day05/tables/*.csv
+reports/day05/challenge/*.csv

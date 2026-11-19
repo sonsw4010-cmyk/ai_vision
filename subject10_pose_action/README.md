@@ -157,3 +157,102 @@ scripts/
 Day 05에서는 여러 Subject와 반복 Take를 이용하여
 Sequence 데이터를 학습용 Dataset 구조로 확장하고
 품질검수와 데이터 분리를 진행한다.
+
+## Day 05 - Keypoint Dataset QA & Subject-wise Split
+
+### Dataset
+
+```text
+3 Subjects
+×
+6 Actions
+×
+1 Take
+=
+18 MP4
+```
+
+```text
+A001 bend_return
+A002 leg_raise_lower
+A003 walk_turn_walk
+A004 drink_return
+A005 sit_stand
+A006 wave
+```
+
+### Pipeline
+
+```text
+18 MP4
+        ↓
+COCO 17 Keypoint Dataset
+        ↓
+자동 QA
+        ↓
+AUTO_PASS 13
+CHECK 5
+        ↓
+CHECK Human QA
+        ↓
+Human PASS 5
+        ↓
+Approved 18 Clips
+        ↓
+Subject-wise Split
+        ↓
+S01 → Train
+S02 → Validation
+S03 → Test
+        ↓
+Leakage check: OK
+```
+
+### 주요 결과
+
+- Keypoint CSV: 18개
+- AUTO_PASS: 13개
+- CHECK: 5개
+- CHECK Human PASS: 5개
+- Approved Clips: 18개
+- Train: S01 / 6 Clips
+- Validation: S02 / 6 Clips
+- Test: S03 / 6 Clips
+- Subject overlap: 없음
+- Clip overlap: 없음
+
+### Random Frame Split 비교
+
+```text
+Train Frames: 1946
+Test Frames : 487
+
+Subject overlap:
+S01, S02, S03
+
+Clip overlap:
+18
+```
+
+따라서 최종 평가에는 Random Frame Split을 사용하지 않고
+Subject-wise Split을 사용합니다.
+
+### 주요 실행 파일
+
+```text
+scripts/
+├── 25_check_day05_data.py
+├── 26_extract_keypoint_dataset.py
+├── 27_keypoint_qa.py
+├── 28_validate_human_review.py
+├── 29_build_approved_manifest.py
+├── 30_build_subject_split.py
+├── 31_check_split_leakage.py
+└── 32_demo_frame_split_leakage.py
+```
+
+### Next
+
+Day 06에서는 Day 05의 Keypoint Dataset과 Subject-wise Split을 그대로 사용하여
+Body Normalization과 Joint Angle Feature를 만들고
+Action Recognition Baseline 학습으로 연결합니다.
