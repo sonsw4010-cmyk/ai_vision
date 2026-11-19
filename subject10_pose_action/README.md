@@ -256,3 +256,63 @@ scripts/
 Day 06에서는 Day 05의 Keypoint Dataset과 Subject-wise Split을 그대로 사용하여
 Body Normalization과 Joint Angle Feature를 만들고
 Action Recognition Baseline 학습으로 연결합니다.
+
+---
+
+## Day 06 - Action Recognition Baseline
+
+### Input
+
+Day 05 Approved Keypoint Dataset
+
+- S01 → Train (6 Clips)
+- S02 → Validation (6 Clips)
+- S03 → Test (6 Clips)
+- 6 Actions: `bend_return`, `drink_return`, `leg_raise_lower`, `sit_stand`, `walk_turn_walk`, `wave`
+- Total: 18 Clips
+
+### Pipeline
+
+```text
+Keypoint CSV (18개)
+  ↓
+38-D Frame Feature (좌표 34개 + 관절 각도 4개)
+  ↓
+Sequence Resampling (30 Step)
+  ↓
+Sequence Feature (1,140-D)
+  ↓
+Random Forest Baseline 학습 (S01, 300 Trees)
+  ↓
+Validation 평가 (S02) & 오분류 분석
+```
+
+### Baseline 설정
+
+- Sequence Steps: 30
+- Feature Count: 1,140
+- n_estimators: 300
+- max_depth: null
+- random_state: 42
+
+### Baseline Validation 결과 (S02)
+
+- Accuracy: 0.5000 (3 / 6)
+- Macro F1: 0.4444
+
+Confusion Matrix & Misclassified:
+- `walk_turn_walk` → `leg_raise_lower` (conf: 0.213)
+- `drink_return` → `wave` (conf: 0.227)
+- `wave` → `drink_return` (conf: 0.220)
+
+### 주요 실행 파일
+
+```text
+scripts/
+├── 33_check_day06_inputs.py
+├── 34_build_sequence_dataset.py
+├── 35_train_rf_baseline.py
+├── 36_evaluate_validation.py
+└── 37_analyze_misclassified.py
+```
+
