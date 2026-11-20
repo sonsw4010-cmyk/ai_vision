@@ -316,3 +316,69 @@ scripts/
 └── 37_analyze_misclassified.py
 ```
 
+---
+
+## Day 07 - Sliding Window & IP Webcam Realtime Action
+
+### Goal
+
+Day06에서 학습한 Random Forest Action Model을
+Saved MP4와 IP Webcam의 연속 Frame에 연결하여
+Realtime Action Recognition Pipeline을 구성했습니다.
+
+### Input
+
+- Day06 Random Forest Action Model (`rf_action_baseline.joblib`)
+- S02 Validation MP4
+- IP Webcam Stream
+
+### Action Classes
+
+- `bend_return`
+- `leg_raise_lower`
+- `walk_turn_walk`
+- `drink_return`
+- `sit_stand`
+- `wave`
+
+### Runtime Pipeline
+
+```text
+Saved MP4 / IP Webcam
+        ↓
+YOLO Pose
+        ↓
+38-D Frame Feature
+        ↓
+Timed Sliding Window
+        ↓
+Day06 Final Sequence Steps(30)로 Resampling
+        ↓
+Random Forest
+        ↓
+Raw Prediction
+        ↓
+Confidence Threshold
+        ↓
+Action / UNKNOWN
+        ↓
+Prediction Stabilization
+        ↓
+Stable Action
+```
+
+### 주요 실행 파일
+
+```text
+configs/day07_realtime.json
+
+src/realtime_utils.py
+
+scripts/
+├── 41_check_day07_inputs.py
+├── 42_realtime_action_video.py
+├── 43_summarize_realtime_runs.py
+└── 44_ip_webcam_action_realtime.py
+```
+
+
