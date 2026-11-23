@@ -1,0 +1,19 @@
+{
+  "sequence_steps": 30,
+  "min_valid_frames": 10,
+  "random_state": 42,
+  "n_estimators": 300,
+  "max_depth": null,
+  "train_subjects": [
+    "S01",
+    "S02",
+    "S03"
+  ],
+  "val_subjects": [
+    "S04"
+  ],
+  "test_subjects": [
+    "S05"
+  ],
+  "action_classes_csv": "configs/motion_capture_action_classes.csv"
+}

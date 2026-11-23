@@ -1,0 +1,50 @@
+{
+  "train_clips": 153,
+  "val_clips": 51,
+  "test_clips": 51,
+  "subjects": {
+    "train": [
+      "S01",
+      "S02",
+      "S03"
+    ],
+    "val": [
+      "S04"
+    ],
+    "test": [
+      "S05"
+    ]
+  },
+  "classes": [
+    "body_slam",
+    "crouch_take_item",
+    "fall_backward",
+    "fall_forward",
+    "fall_sideways",
+    "front_kick",
+    "grab_shake",
+    "kiosk_tap",
+    "lie_backward",
+    "lie_forward",
+    "push",
+    "shotgun",
+    "sit_floor",
+    "sit_on_object",
+    "swing",
+    "throw_one_hand",
+    "vomit"
+  ],
+  "feature_count": 1140,
+  "sequence_steps": 30,
+  "min_valid_frames": 10,
+  "n_estimators": 300,
+  "max_depth": null,
+  "random_state": 42,
+  "metrics": {
+    "train_accuracy": 1.0,
+    "val_accuracy": 0.5294117647058824,
+    "val_macro_f1": 0.5076648841354723,
+    "test_accuracy": 0.6274509803921569,
+    "test_macro_f1": 0.5949364361129068
+  }
+}
